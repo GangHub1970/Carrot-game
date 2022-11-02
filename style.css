@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 button {
   cursor: pointer;
 }
@@ -78,14 +82,20 @@ body {
   height: 44%;
 }
 
+.game .game__items img {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .game__items img:hover {
+  transform: scale(1.2);
+}
+
 .pop-up {
   position: absolute;
   top: 40%;
   left: 50%;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   width: 400px;
   height: 200px;
   transform: translateX(-50%);
@@ -95,9 +105,10 @@ body {
 
 .pop-up .replay-btn {
   position: relative;
+  display: block;
   width: 52px;
   height: 52px;
-  margin-bottom: 10px;
+  margin: 44px auto 10px;
   border: 3px solid black;
   border-radius: 10px;
   background-color: bisque;
@@ -119,12 +130,4 @@ body {
 
 .pop-up .replay-btn:hover .material-icons {
   color: red;
-}
-
-.item {
-  transition: 0.2s;
-}
-
-.item:hover {
-  transform: scale(1.2);
 }
