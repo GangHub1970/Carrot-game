@@ -1,11 +1,13 @@
+const ITEMSIZE = 80;
+
 export default class Field {
-  constructor() {
+  constructor(carrotCount, bugCount) {
     this.items = document.querySelector(".game__items");
     this.itemsRect = this.items.getBoundingClientRect();
 
-    this.ITEMSIZE = 80;
-    this.ITEMCOUNT = 5;
-    this.remainCarrot = this.ITEMCOUNT;
+    this.CARROTCOUNT = carrotCount;
+    this.BUGCOUNT = bugCount;
+    this.remainCarrot = this.CARROTCOUNT;
 
     this.items.addEventListener("click", (event) => {
       this.onClick && this.onClick(event);
@@ -17,8 +19,8 @@ export default class Field {
   }
 
   createItems(element) {
-    const x = randomNumber(0, this.itemsRect.width - this.ITEMSIZE);
-    const y = randomNumber(0, this.itemsRect.height - this.ITEMSIZE);
+    const x = randomNumber(0, this.itemsRect.width - ITEMSIZE);
+    const y = randomNumber(0, this.itemsRect.height - ITEMSIZE);
 
     const item = document.createElement("img");
     item.setAttribute("src", `./img/${element}.png`);
@@ -30,10 +32,10 @@ export default class Field {
   }
 
   create() {
-    for (let i = 0; i < this.ITEMCOUNT; i++) {
+    for (let i = 0; i < this.CARROTCOUNT; i++) {
       this.createItems("carrot");
     }
-    for (let i = 0; i < this.ITEMCOUNT; i++) {
+    for (let i = 0; i < this.BUGCOUNT; i++) {
       this.createItems("bug");
     }
   }

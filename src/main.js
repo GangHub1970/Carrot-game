@@ -2,21 +2,21 @@ import * as sound from "./sound.js";
 import PopUp from "./pop-up.js";
 import Field from "./field.js";
 
-const game = document.querySelector(".game");
 const controlBtn = document.querySelector(".control-btn");
-const controlBtnShape = controlBtn.querySelector(".material-icons");
+const controlBtnShape = document.querySelector(".control-btn .material-icons");
 const timer = document.querySelector(".timer");
 const count = document.querySelector(".count");
 
 const gameFinishBanner = new PopUp();
 gameFinishBanner.onClickListener(onReplayClick);
 
-const gameField = new Field();
+const gameField = new Field(5, 5);
 gameField.onClickListener(onItemClick);
 
+const DURATION = 5;
 let started = false;
 let gameTimer = undefined;
-let remainTime = gameField.ITEMCOUNT;
+let remainTime = DURATION;
 
 function onControl() {
   if (!started) {
@@ -27,7 +27,6 @@ function onControl() {
   } else {
     controlBtnShape.textContent = "play_arrow";
     gameFinishBanner.show("stop");
-    hideGamePointer();
     stopTimer();
     sound.playAlert();
     sound.stopBg();
@@ -44,14 +43,12 @@ function onItemClick(event) {
     sound.playCarrot();
     if (gameField.remainCarrot === 0) {
       gameFinishBanner.show("win");
-      hideGamePointer();
       stopTimer();
       sound.playWin();
     }
   } else if (itemType === "bug") {
     stopTimer();
     gameFinishBanner.show("lose");
-    hideGamePointer();
     sound.playBug();
     sound.stopBg();
   }
@@ -61,12 +58,11 @@ function onReplayClick() {
   gameField.items.innerHTML = "";
   gameField.create();
   sound.playBg();
-  gameField.remainCarrot = gameField.ITEMCOUNT;
-  count.textContent = `${gameField.remainCarrot}`;
-  remainTime = gameField.ITEMCOUNT;
-  timer.textContent = `0:${remainTime}`;
+  gameField.remainCarrot = gameField.CARROTCOUNT;
+  count.textContent = `${gameField.CARROTCOUNT}`;
+  remainTime = DURATION;
+  timer.textContent = `0:${DURATION}`;
   startTimer();
-  onGamePointer();
   if (!started) {
     started = !started;
     controlBtnShape.textContent = "stop";
@@ -79,7 +75,6 @@ function startTimer() {
     timer.textContent = `0:${remainTime}`;
     if (remainTime === 0) {
       gameFinishBanner.show("lose");
-      hideGamePointer();
       stopTimer();
       sound.playBug();
       sound.stopBg();
@@ -89,14 +84,6 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(gameTimer);
-}
-
-function hideGamePointer() {
-  game.style.pointerEvents = "none";
-}
-
-function onGamePointer() {
-  game.style.pointerEvents = "auto";
 }
 
 controlBtn.addEventListener("click", onControl);

@@ -1,3 +1,13 @@
+const game = document.querySelector(".game");
+
+function hideGamePointer() {
+  game.style.pointerEvents = "none";
+}
+
+function onGamePointer() {
+  game.style.pointerEvents = "auto";
+}
+
 export default class PopUp {
   constructor() {
     this.popUp = document.querySelector(".pop-up");
@@ -6,7 +16,6 @@ export default class PopUp {
     this.replayBtn.addEventListener("click", () => {
       this.onClick && this.onClick();
       this.hide();
-      // onGamePointer();
     });
   }
 
@@ -16,7 +25,7 @@ export default class PopUp {
 
   show(reason) {
     this.popUp.classList.remove("hidden");
-    // hideGamePointer();
+    hideGamePointer();
     switch (reason) {
       case "win":
         this.popUpText.textContent = "YOU WIN 🎉";
@@ -32,14 +41,6 @@ export default class PopUp {
 
   hide() {
     this.popUp.classList.add("hidden");
-    // onGamePointer();
+    onGamePointer();
   }
 }
-
-// function hideGamePointer() {
-//   game.style.pointerEvents = "none";
-// }
-
-// function onGamePointer() {
-//   game.style.pointerEvents = "auto";
-// }
