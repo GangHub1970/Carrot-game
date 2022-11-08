@@ -37,6 +37,7 @@ body {
   border: 3px solid black;
   border-radius: 10px;
   background-color: bisque;
+  pointer-events: none;
 }
 
 .game .game__info .control-btn .material-icons {
@@ -130,4 +131,60 @@ body {
 
 .pop-up .replay-btn:hover .material-icons {
   color: red;
+}
+
+.info-form {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  font-weight: 700;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #ffe4c4;
+}
+
+.info-form div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.info-form label {
+  font-size: 20px;
+}
+
+.info-form input {
+  width: 200px;
+  height: 40px;
+  border: 3px solid black;
+  border-radius: 10px;
+  outline: none;
+  font-size: 24px;
+}
+
+.info-form input::placeholder {
+  text-align: center;
+}
+
+.info-form > input {
+  width: 160px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.info-form > input:hover {
+  color: white;
+  background-color: black;
 }

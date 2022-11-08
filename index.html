@@ -18,9 +18,9 @@
         <button class="control-btn">
           <span class="material-icons">play_arrow</span>
         </button>
-        <span class="timer">0:5</span>
-        <div class="count-box">
-          <span class="count">5</span>
+        <span class="timer hidden"></span>
+        <div class="count-box hidden">
+          <span class="count"></span>
         </div>
       </div>
       <div class="game__items"></div>
@@ -31,5 +31,30 @@
       </button>
       <span class="pop-up__text">Replay?</span>
     </section>
+    <form class="info-form">
+      <div class="duration">
+        <label for="duration">게임시간</label>
+        <input
+          type="number"
+          min="0"
+          max="10"
+          id="duration"
+          placeholder="0 ~ 10"
+          required
+        />
+      </div>
+      <div class="carrot-count">
+        <label for="carrot-count">당근 수</label>
+        <input
+          type="number"
+          min="0"
+          max="10"
+          id="carrot-count"
+          placeholder="0 ~ 10"
+          required
+        />
+      </div>
+      <input class="submit" type="submit" value="시작!" />
+    </form>
   </body>
 </html>

@@ -5,22 +5,25 @@ import Field from "./field.js";
 const controlBtn = document.querySelector(".control-btn");
 const controlBtnShape = document.querySelector(".control-btn .material-icons");
 const timer = document.querySelector(".timer");
-const count = document.querySelector(".count");
+const countBox = document.querySelector(".count-box");
+const count = countBox.querySelector(".count");
+const infoFrom = document.querySelector(".info-form");
+const infoDuration = infoFrom.querySelector("#duration");
+const infoCount = infoFrom.querySelector("#carrot-count");
+
+let DURATION;
+let remainTime;
+let started = false;
+let gameTimer = undefined;
+let gameField;
 
 const gameFinishBanner = new PopUp();
 gameFinishBanner.onClickListener(onReplayClick);
 
-const gameField = new Field(5, 5);
-gameField.onClickListener(onItemClick);
-
-const DURATION = 5;
-let started = false;
-let gameTimer = undefined;
-let remainTime = DURATION;
-
 function onControl() {
   if (!started) {
     controlBtnShape.textContent = "stop";
+    toggleInfo();
     gameField.create();
     startTimer();
     sound.playBg();
@@ -69,6 +72,34 @@ function onReplayClick() {
   }
 }
 
+function onSubmit(event) {
+  event.preventDefault();
+  hiddenFrom();
+  onBtnPointer();
+
+  const itemCount = Number(infoCount.value);
+  DURATION = Number(infoDuration.value);
+  gameField = new Field(itemCount, itemCount);
+  gameField.onClickListener(onItemClick);
+
+  timer.textContent = `0:${DURATION}`;
+  remainTime = DURATION;
+  count.textContent = itemCount;
+}
+
+function toggleInfo() {
+  timer.classList.toggle("hidden");
+  countBox.classList.toggle("hidden");
+}
+
+function hiddenFrom() {
+  infoFrom.style.display = "none";
+}
+
+function onBtnPointer() {
+  controlBtn.style.pointerEvents = "auto";
+}
+
 function startTimer() {
   gameTimer = setInterval(() => {
     remainTime--;
@@ -87,3 +118,4 @@ function stopTimer() {
 }
 
 controlBtn.addEventListener("click", onControl);
+infoFrom.addEventListener("submit", onSubmit);
